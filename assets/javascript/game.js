@@ -1,7 +1,11 @@
-var { counter, targetNumber } = initGame();
-$("#number-to-guess").text(targetNumber);
+
+
 let wins = 0;
 let losses = 0;
+let counter = 0;
+let targetNumber = 0;
+let crystalValue = "";
+initGame();
 
   // This time, our click event applies to every single crystal on the page. Not just one.
   $(".crystal-image").on("click", function() {
@@ -11,49 +15,50 @@ let losses = 0;
     // Using the .attr("data-crystalvalue") allows us to grab the value out of the "data-crystalvalue" attribute.
     // Since attributes on HTML elements are strings, we must convert it to an integer before adding to the counter
 
-    var crystalValue = ($(this).attr("data-crystalvalue"));
+    crystalValue = ($(this).attr("data-crystalvalue"));
     crystalValue = parseInt(crystalValue);
     // We then add the crystalValue to the user's "counter" which is a global variable.
     // Every click, from every crystal adds to the global counter.
     counter += crystalValue;
-
+console.log('counter' + counter)
     // All of the same game win-lose logic applies. So the rest remains unchanged.
-    alert("New score: " + counter);
-
+   // alert("New score: " + counter);
     $("#total-score").text(counter);
 
 
     if (counter === targetNumber) {
       alert("You win!");
       wins++;
-      $("#win-text").text(wins);
       initGame();
     }
 
     else if (counter >= targetNumber) {
       alert("You lose!!");
       losses;;
-      $("#losses-text").text(losses);      
       initGame();
     }
 
   });
 
 function initGame() {
-  let min = 19;
-  let max = 120;
-  var targetNumber = Math.floor(Math.random() * (max - min + 1) + min);
+  min = 19;
+  max = 120;
+  counter = 0;
+  targetNumber = Math.floor(Math.random() * (max - min + 1) + min);
   console.log(targetNumber);
-  var counter = initGems();
-  return { counter, targetNumber };
+  $("#total-score").text(counter);
+  $("#number-to-guess").text(targetNumber);
+  $("#crystals").empty();
+  console.log('in init')
+  initGems();
+}
 
   function initGems() {
     let imageSrcArray = ["assets/images/rubygem.jpg", "assets/images/blue-spinel-gemstone.jpg", "assets/images/yellowgem.jpg", "assets/images/emeraldgem.jpg"];
    
-    var counter = 0;
     // Now for the hard part. Creating multiple crystals each with their own unique number value.
     // We begin by expanding our array to include four options.
-    var numberOptions = [10, 5, 3, 7];
+   // $("#crystals").empty();
     // Next we create a for loop to create crystals for every numberOption.
     for (var i = 0; i < imageSrcArray.length; i++) {
       // For each iteration, we will create an imageCrystal
@@ -74,7 +79,7 @@ function initGame() {
       console.log(crystalNumber);
       // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
       $("#crystals").append(imageCrystal);
+      console.log('in crystal init')
     }
-    return counter;
   }
-}
+
