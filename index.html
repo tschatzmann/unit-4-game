@@ -17,15 +17,13 @@
   <h1>Number to Guess: <span id="number-to-guess"></span></h1>
 
   <!-- Note that this div is now empty. We will fill it dynamically -->
-  <div class="container">
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-2">Crystal Collector</h1>
-      </div>
+  <div class="container-fluid">
+    <div class="jumbotron jumbotron">
+      <h1 class="display-2">Crystal Collector</h1>
     </div>
   </div>
-  <div class="container">
-    <div class="row justify-content-center">
+  <div class="container-fluid">
+    <div class="row justify-content-left">
       <div class="row">
         <div class="col-6">
           <div class="card" class="text-align: left">
@@ -46,11 +44,13 @@
             <div class="col-5">
               <div class="card">
                 <div class="card-head">
-                  random number
+                  <h4>
+                    Random Rumber: <span id="random-number"></span>
+                  </h4>
                 </div>
               </div>
             </div>
-            <div class="col-3">
+            <div class="col-5">
               <div class="card">
                 <div class="card-body">
                   <p>Wins:</p>
@@ -60,20 +60,45 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div id="crystals">
-              </div>
+            <div class="col-2">
 
             </div>
           </div>
-        </div>
 
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div id="crystals">
+  </div>
+  <div class="container-fluide">
+    <div class="row">
+      <div class="col-9">
+        <div class="card">
+          <div class="card-header">
+            <h4>
+              Your total scrore is:
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-5">
+        <div class="card">
+          <div class="card-body">
+            <span id="total-score"></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-7">
 
       </div>
     </div>
   </div>
+
 
 
   <!-- JAVASCRIPT  -->
