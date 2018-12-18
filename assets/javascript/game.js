@@ -1,37 +1,7 @@
-var targetNumber = 53;
-const imageSrcArray = ["assets/images/rubygem.jpg", "assets/images/blue-spinel-gemstone.jpg", "assets/images/yellowgem.jpg","assets/images/emeraldgem.jpg"]
-
+var { counter, targetNumber } = initGame();
 $("#number-to-guess").text(targetNumber);
-
-  var counter = 0;
-
-  // Now for the hard part. Creating multiple crystals each with their own unique number value.
-
-  // We begin by expanding our array to include four options.
-  var numberOptions = [10, 5, 3, 7];
-
-  // Next we create a for loop to create crystals for every numberOption.
-  for (var i = 0; i < numberOptions.length; i++) {
-
-    // For each iteration, we will create an imageCrystal
-    var imageCrystal = $("<img>");
-
-    // First each crystal will be given the class ".crystal-image".
-    // This will allow the CSS to take effect.
-    imageCrystal.addClass("crystal-image");
-
-    // Each imageCrystal will be given a src link to the crystal image
-    //imageCrystal.attr("src", "http://cdn.playbuzz.com/cdn/35910209-2844-45c0-b099-f4d82878d54f/00261fda-4062-4096-81fd-8cf96b9034e8.jpg");
-    imageName = imageSrcArray[i]
-    imageCrystal.attr("src", imageName);
-
-    // Each imageCrystal will be given a data attribute called data-crystalValue.
-    // This data attribute will be set equal to the array value.
-    imageCrystal.attr("data-crystalvalue", numberOptions[i]);
-
-    // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
-    $("#crystals").append(imageCrystal);
-  }
+let wins = 0;
+let losses = 0;
 
   // This time, our click event applies to every single crystal on the page. Not just one.
   $(".crystal-image").on("click", function() {
@@ -50,12 +20,61 @@ $("#number-to-guess").text(targetNumber);
     // All of the same game win-lose logic applies. So the rest remains unchanged.
     alert("New score: " + counter);
 
+    $("#total-score").text(counter);
+
+
     if (counter === targetNumber) {
       alert("You win!");
+      wins++;
+      $("#win-text").text(wins);
+      initGame();
     }
 
     else if (counter >= targetNumber) {
       alert("You lose!!");
+      losses;;
+      $("#losses-text").text(losses);      
+      initGame();
     }
 
   });
+
+function initGame() {
+  let min = 19;
+  let max = 120;
+  var targetNumber = Math.floor(Math.random() * (max - min + 1) + min);
+  console.log(targetNumber);
+  var counter = initGems();
+  return { counter, targetNumber };
+
+  function initGems() {
+    let imageSrcArray = ["assets/images/rubygem.jpg", "assets/images/blue-spinel-gemstone.jpg", "assets/images/yellowgem.jpg", "assets/images/emeraldgem.jpg"];
+   
+    var counter = 0;
+    // Now for the hard part. Creating multiple crystals each with their own unique number value.
+    // We begin by expanding our array to include four options.
+    var numberOptions = [10, 5, 3, 7];
+    // Next we create a for loop to create crystals for every numberOption.
+    for (var i = 0; i < imageSrcArray.length; i++) {
+      // For each iteration, we will create an imageCrystal
+      var imageCrystal = $("<img>");
+      // First each crystal will be given the class ".crystal-image".
+      // This will allow the CSS to take effect.
+      imageCrystal.addClass("crystal-image");
+      // Each imageCrystal will be given a src link to the crystal image
+      //imageCrystal.attr("src", "http://cdn.playbuzz.com/cdn/35910209-2844-45c0-b099-f4d82878d54f/00261fda-4062-4096-81fd-8cf96b9034e8.jpg");
+      imageName = imageSrcArray[i];
+      imageCrystal.attr("src", imageName);
+      // Each imageCrystal will be given a data attribute called data-crystalValue.
+      // This data attribute will be set equal to the array value.
+      let min = 1;
+      let max = 12;
+      var crystalNumber = Math.floor(Math.random() * (max - min + 1) + min);
+      imageCrystal.attr("data-crystalvalue", crystalNumber);
+      console.log(crystalNumber);
+      // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
+      $("#crystals").append(imageCrystal);
+    }
+    return counter;
+  }
+}
