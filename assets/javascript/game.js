@@ -11,8 +11,8 @@ $(document).ready(function () {
   initGems();
 
   // This time, our click event applies to every single crystal on the page. Not just one.
-  $(document).on("click", ".crystals", function () {
-    console.log("inside click function")
+  $("#crystals").on("click", ".crystal-image", function () {
+    console.log("inside click function");
 
     // Determining the crystal's value requires us to extract the value from the data attribute.
     // Using the $(this) keyword specifies that we should be extracting the crystal value of the clicked crystal.
@@ -25,7 +25,7 @@ $(document).ready(function () {
     // We then add the crystalValue to the user's "counter" which is a global variable.
     // Every click, from every crystal adds to the global counter.
     counter += crystalValue;
-    console.log('counter' + counter)
+    console.log('counter' + counter);
     // All of the same game win-lose logic applies. So the rest remains unchanged.
     // alert("New score: " + counter);
     $("#total-score").text(counter);
@@ -40,7 +40,7 @@ $(document).ready(function () {
 
     else if (counter >= targetNumber) {
       alert("You lose!!");
-      losses;;
+      losses++;
       initGame();
       initGems();
     }
@@ -57,7 +57,7 @@ $(document).ready(function () {
     $("#total-score").text(counter);
     $("#number-to-guess").text(targetNumber);
     $("#crystals").empty();
-    console.log('in init')
+    console.log('in init');
 
   }
 
@@ -85,8 +85,8 @@ $(document).ready(function () {
       console.log(randomNumber);
       // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
       $("#crystals").append(imageCrystal);
-      console.log('in crystal init')
+      console.log('in crystal init');
     }
   }
-})
+});
 
