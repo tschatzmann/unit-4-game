@@ -38,7 +38,7 @@ $(document).ready(function () {
       initGems();
     }
 
-    else if (counter >= targetNumber) {
+    else if (counter > targetNumber) {
       alert("You lose!!");
       losses++;
       initGame();
@@ -55,7 +55,9 @@ $(document).ready(function () {
     targetNumber = Math.floor(Math.random() * (max - min + 1) + min);
     console.log(targetNumber);
     $("#total-score").text(counter);
-    $("#number-to-guess").text(targetNumber);
+    $("#number-to-guess-text").text(targetNumber);
+    $("#wins-text").text("Wins: "+ wins)
+    $("#losses-text").text("Losses:  " + losses)
     $("#crystals").empty();
     console.log('in init');
 
