@@ -56,8 +56,8 @@ $(document).ready(function () {
     console.log(targetNumber);
     $("#total-score").text(counter);
     $("#number-to-guess-text").text(targetNumber);
-    $("#wins-text").text("Wins: "+ wins)
-    $("#losses-text").text("Losses:  " + losses)
+    $("#wins-text").text(wins)
+    $("#losses-text").text(losses)
     $("#crystals").empty();
     console.log('in init');
 
