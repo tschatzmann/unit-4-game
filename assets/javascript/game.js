@@ -2,7 +2,7 @@
 $(document).ready(function () {
   var wins = 0;
   var losses = 0;
-  var counter = 0;
+  var totalScore = 0;
   var targetNumber = 0;
   var randomNumber = 0;
   var gemMin = 1;
@@ -10,36 +10,32 @@ $(document).ready(function () {
   initGame();
   initGems();
 
-  // This time, our click event applies to every single crystal on the page. Not just one.
+  // This click will return the object for the crystals id with a class of crystal-image
   $("#crystals").on("click", ".crystal-image", function () {
-    console.log("inside click function");
-
     // Determining the crystal's value requires us to extract the value from the data attribute.
     // Using the $(this) keyword specifies that we should be extracting the crystal value of the clicked crystal.
     // Using the .attr("data-crystalvalue") allows us to grab the value out of the "data-crystalvalue" attribute.
-    // Since attributes on HTML elements are strings, we must convert it to an integer before adding to the counter
+    // Since attributes on HTML elements are strings, we must convert it to an integer before adding to the totalScore
 
     var crystalValue = ($(this).attr("data-crystalvalue"));
-    console.log('this' + this);
     crystalValue = parseInt(crystalValue);
-    // We then add the crystalValue to the user's "counter" which is a global variable.
-    // Every click, from every crystal adds to the global counter.
-    counter += crystalValue;
-    console.log('counter' + counter);
+    // We then add the crystalValue to the user's "totalScore" which is a global variable.
+    // Every click, from every crystal adds to the global totalScore.
+    totalScore += crystalValue;
     // All of the same game win-lose logic applies. So the rest remains unchanged.
-    // alert("New score: " + counter);
-    $("#total-score").text(counter);
+
+    $("#total-score").text(totalScore);
 
 
-    if (counter === targetNumber) {
-      alert("You win!");
+    if (totalScore === targetNumber) {
+      alert('You win!');
       wins++;
       initGame();
       initGems();
     }
 
-    else if (counter > targetNumber) {
-      alert("You lose!!");
+    else if (totalScore > targetNumber) {
+      alert('You lose!!');
       losses++;
       initGame();
       initGems();
@@ -50,11 +46,11 @@ $(document).ready(function () {
   function initGame() {
     min = 19;
     max = 120;
-    counter = 0;
+    totalScore = 0;
     randomNumber = 0;
-    targetNumber = Math.floor(Math.random() * (max - min + 1) + min);
+    targetNumber = GetRandomNumber(max,min);
     console.log(targetNumber);
-    $("#total-score").text(counter);
+    $("#total-score").text(totalScore);
     $("#number-to-guess-text").text(targetNumber);
     $("#wins-text").text(wins)
     $("#losses-text").text(losses)
@@ -82,7 +78,7 @@ $(document).ready(function () {
       imageCrystal.attr("src", imageName);
       // Each imageCrystal will be given a data attribute called data-crystalValue.
       // This data attribute will be set equal to the array value.
-      randomNumber = Math.floor(Math.random() * (gemMax - gemMin + 1) + gemMin);
+      randomNumber = GetRandomNumber(gemMax,gemMin)
       imageCrystal.attr("data-crystalvalue", randomNumber);
       console.log(randomNumber);
       // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
@@ -91,4 +87,9 @@ $(document).ready(function () {
     }
   }
 });
+
+function GetRandomNumber(num1,num2) {
+  targetNumber = Math.floor(Math.random() * (num1 - num2 + 1) + num2);
+  return targetNumber;
+}
 
