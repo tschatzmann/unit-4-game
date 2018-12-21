@@ -49,14 +49,12 @@ $(document).ready(function () {
     totalScore = 0;
     randomNumber = 0;
     targetNumber = GetRandomNumber(max,min);
-    console.log(targetNumber);
     $("#total-score").text(totalScore);
     $("#number-to-guess-text").text(targetNumber);
     $("#wins-text").text(wins)
     $("#losses-text").text(losses)
     $("#crystals").empty();
-    console.log('in init');
-
+    
   }
 
   function initGems() {
@@ -67,7 +65,7 @@ $(document).ready(function () {
     // $("#crystals").empty();
     // Next we create a for loop to create crystals for every numberOption.
     for (var i = 0; i < imageSrcArray.length; i++) {
-      // For each iteration, we will create an imageCrystal
+      // For each iteration, we will create an imageCrystal  
       var imageCrystal = $("<img>");
       // First each crystal will be given the class ".crystal-image".
       // This will allow the CSS to take effect.
@@ -80,10 +78,8 @@ $(document).ready(function () {
       // This data attribute will be set equal to the array value.
       randomNumber = GetRandomNumber(gemMax,gemMin)
       imageCrystal.attr("data-crystalvalue", randomNumber);
-      console.log(randomNumber);
       // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
       $("#crystals").append(imageCrystal);
-      console.log('in crystal init');
     }
   }
 });
